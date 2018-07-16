@@ -2,6 +2,7 @@ package com.projectbox.footballtask.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import com.projectbox.footballtask.R
@@ -40,6 +41,7 @@ class DetailActivityUI(val imageRes: Int, val detail: String) : AnkoComponent<De
     override fun createView(ui: AnkoContext<DetailActivity>) = with(ui) {
         verticalLayout {
             padding = dip(32)
+            gravity = Gravity.CENTER_HORIZONTAL
 
             imageView {
                 scaleType = ImageView.ScaleType.CENTER_INSIDE
