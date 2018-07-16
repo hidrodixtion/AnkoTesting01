@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.projectbox.footballtask.R
 import com.projectbox.footballtask.adapter.viewholder.ClubVH
+import com.projectbox.footballtask.event.ItemClickEvent
 import com.projectbox.footballtask.model.Club
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by adinugroho
@@ -23,7 +25,7 @@ class ClubAdapter(val list: List<Club>) : RecyclerView.Adapter<ClubVH>() {
 
     override fun onBindViewHolder(holder: ClubVH, position: Int) {
         holder.bind(list[position])
-        Log.v("DATA", list[position].title)
+        holder.containerView.setOnClickListener { EventBus.getDefault().post(ItemClickEvent(position)) }
     }
 }
 

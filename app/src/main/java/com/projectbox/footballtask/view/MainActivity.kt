@@ -1,13 +1,14 @@
 package com.projectbox.footballtask.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.projectbox.footballtask.R
 import com.projectbox.footballtask.adapter.ClubAdapter
+import com.projectbox.footballtask.event.ItemClickEvent
 import com.projectbox.footballtask.model.Club
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -31,6 +32,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainActivityUI(ClubAdapter(laligaClubs)).setContentView(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe
+    fun onItemClickEvent(e: ItemClickEvent) {
+        startActivity<DetailActivity>(DetailActivity.EXT_DATA to laligaClubs[e.position])
     }
 }
 
