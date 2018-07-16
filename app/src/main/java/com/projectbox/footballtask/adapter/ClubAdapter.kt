@@ -1,16 +1,12 @@
 package com.projectbox.footballtask.adapter
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.view.Gravity
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.projectbox.footballtask.R
 import com.projectbox.footballtask.adapter.viewholder.ClubVH
 import com.projectbox.footballtask.model.Club
-import org.jetbrains.anko.*
 
 /**
  * Created by adinugroho
@@ -18,6 +14,7 @@ import org.jetbrains.anko.*
 class ClubAdapter(val list: List<Club>) : RecyclerView.Adapter<ClubVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClubVH {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_club, parent, false)
+        Log.v("VIEW", "$v")
         return ClubVH(v)
 //        ClubVH(ClubItemUI().createView(AnkoContext.Companion.create(parent.context)))
     }
@@ -26,6 +23,7 @@ class ClubAdapter(val list: List<Club>) : RecyclerView.Adapter<ClubVH>() {
 
     override fun onBindViewHolder(holder: ClubVH, position: Int) {
         holder.bind(list[position])
+        Log.v("DATA", list[position].title)
     }
 }
 

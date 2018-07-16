@@ -3,9 +3,11 @@ package com.projectbox.footballtask.view
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.projectbox.footballtask.R
 import com.projectbox.footballtask.adapter.ClubAdapter
 import com.projectbox.footballtask.model.Club
+import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -28,19 +30,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainActivityUI(ClubAdapter()).setContentView(this)
+        MainActivityUI(ClubAdapter(laligaClubs)).setContentView(this)
     }
 }
 
-class MainActivityUI(val adapter: ClubAdapter) : AnkoComponent<MainActivity> {
+class MainActivityUI(val clubAdapter: ClubAdapter) : AnkoComponent<MainActivity> {
     override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
         verticalLayout {
-            lparams(width = matchParent, height = matchParent)
 
             recyclerView {
                 lparams(width = matchParent, height = matchParent)
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(true)
 
+                adapter = clubAdapter
             }
         }
     }
